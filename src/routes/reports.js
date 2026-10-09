@@ -7,6 +7,10 @@ export const reportsRouter = Router();
 
 reportsRouter.post('/', async (req, res) => {
   const { topic } = req.body ?? {}; // Body is undefined when no JSON is sent
+  if (typeof topic !== 'string' || topic.trim() === '') {
+    return res.status(400).json({ error: 'topic is required' });
+  } // Bad input is rejected at the door: no report saved, no event sent
+
   const report = { id: randomUUID(), topic, status: 'pending' };
   reports.set(report.id, report);
 

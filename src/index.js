@@ -3,6 +3,7 @@ import { serve } from 'inngest/express';
 import { inngest } from './inngest/client.js';
 import { sayHello } from './inngest/functions/sayHello.js';
 import { makeReport } from './inngest/functions/makeReport.js';
+import { heartbeat } from './inngest/functions/heartbeat.js';
 import { reportsRouter } from './routes/reports.js';
 
 const app = express();
@@ -20,7 +21,7 @@ app.get('/health', (req, res) => {
 
 app.use('/reports', reportsRouter); // Report endpoints: POST /reports, GET /reports/:id
 
-app.use('/api/inngest', serve({ client: inngest, functions: [sayHello, makeReport] })); // Endpoint the Inngest Dev Server calls to run functions
+app.use('/api/inngest', serve({ client: inngest, functions: [sayHello, makeReport, heartbeat] })); // Endpoint the Inngest Dev Server calls to run functions
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -32,3 +32,6 @@ build/
 # Temporary files
 .tmp/
 temp/
+
+# Claude
+CLAUDE.md
